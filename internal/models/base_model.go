@@ -1,0 +1,55 @@
+package models
+
+import (
+	"time"
+
+	"gorm.io/gorm"
+	"gorm.io/plugin/soft_delete"
+)
+
+// Model  基础Model
+type Model struct {
+	Id         int64                 `gorm:"column:id;primaryKey;autoIncrement;not null" json:"id"`
+	CreateAt   *time.Time            `gorm:"column:created_at;not null" json:"createdAt"`
+	UpdateAt   *time.Time            `gorm:"column:updated_at;not null" json:"updatedAt"`
+	DeletedAt  *time.Time            `gorm:"column:deleted_at;" json:"deletedAt"`
+	CreateTime *time.Time            `gorm:"column:create_time;" json:"createTime"` // 原有表结构字段 用于兼容
+	IsDel      soft_delete.DeletedAt `gorm:"softDelete:flag,DeletedAtField:DeletedAt" json:"isDel"`
+}
+
+/*
+BeforeCreate
+@Author: moruikang
+@Description:
+@receiver *Model
+@param tx
+@return err
+*/
+func (*Model) BeforeCreate(tx *gorm.DB) (err error) {
+	now := time.Now()
+	tx.Statement.SetColumn("created_at", now)
+	tx.Statement.SetColumn("updated_at", now)
+	tx.Statement.SetColumn("create_time", now)
+	tx.Statement.SetColumn("deleted_at", nil)
+	return
+}
+
+/*
+BeforeUpdate
+@Author: moruikang
+@Description:
+@receiver *Model
+@param tx
+@return err
+*/
+func (*Model) BeforeUpdate(tx *gorm.DB) (err error) {
+	if !tx.Statement.Changed("updated_at") {
+		tx.Statement.SetColumn("updated_at", time.Now())
+	}
+	return
+}
+
+func (*Model) BeforeDelete(tx *gorm.DB) (err error) {
+	tx.Statement.SetColumn("deleted_at", time.Now())
+	return
+}
