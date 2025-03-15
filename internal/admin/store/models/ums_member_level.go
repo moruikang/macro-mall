@@ -1,7 +1,5 @@
 package models
 
-import "gorm.io/gorm"
-
 type UmsMemberLevel struct {
 	Model
 	// 等级名称
@@ -32,13 +30,4 @@ type UmsMemberLevel struct {
 
 func (*UmsMemberLevel) TableName() string {
 	return "ums_member_level"
-}
-
-func (umsMemberLevel *UmsMemberLevel) SelectByDefaultStatus(db *gorm.DB, defaultStatus int) ([]*UmsMemberLevel, error) {
-	var umsMemberLevels []*UmsMemberLevel
-	err := db.Where("default_status = ?", defaultStatus).Find(&umsMemberLevels).Error
-	if err != nil {
-		return nil, err
-	}
-	return umsMemberLevels, nil
 }

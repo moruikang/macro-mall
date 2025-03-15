@@ -15,7 +15,7 @@ database:
   gorm_mysql:
     Host: localhost
     Port: 3306
-    Database: mall
+    Database: mall_go
     Username: root
     Password: M@k123456
     Charset: utf8mb4_general_ci
