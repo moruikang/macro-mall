@@ -1,49 +1,35 @@
 server:
-  ApplicationName: mall_admin
-  Enable: true
-  GinRunMode: debug
-  Port: 8080
-  ReadTimeout: 60
+  bind: 0.0.0.0
+  port: 8080
 
+
+# MySQL配置
+mysql:
+  host: localhost:3306
+  username: root
+  password: M@k123456
+  database: mall_go
+  max-open-connections: 100 # 最大打开连接数 默认100
+  max-idle-connections: 100 # 最大空闲连接数 默认100
+  max-connection-life-time: 10 # 连接存活时间 默认10
+
+
+# Redis 配置
+redis:
+  host: localhost
+  port: 6379
+  password: 123456
+  database: 0
+
+
+# JWT 配置
 jwt:
   tokenHeader: "Authorization"
   tokenHead: "Bearer "
-  secret: "mall-go-security-secret"
-  expiration: 604800
-
-database:
-  gorm_mysql:
-    Host: localhost
-    Port: 3306
-    Database: mall_go
-    Username: root
-    Password: M@k123456
-    Charset: utf8mb4_general_ci
-    # 时区设置
-    Loc: Asia/Shanghai
-    # time.Time 与 mysql 日期类型互转
-    ParseTime: true
-
-    GormSlowThreshold: time.Duration
-    GormColorful: true
-    GormIgnoreRecordNotFoundError: true
-    GormParameterizedQueries: true
-    # Gorm 日志级别
-    # 1 Silent，2 Error，3 Warn，4 Info
-    GormLogLevel: 4
-
-  redis:
-    Host: localhost
-    Port: 6379
-    Password: 123456
-    Database: 0
-    MaxIdle: 10
-    MaxActive: 100
-    IdleTimeout: 60
-    Wait: true
-    MaxConnLifetime: 60
-
-# Path: configs\admin-config.yml
+  realm: JWT  # JWT标识
+  key: xpemkvLBGqotqHKRGI  # 服务端密钥
+  timeout: 24 # token过期时间，单位：小时
+  max-refresh: 24 # token刷新时间，单位：小时
 
 
 
