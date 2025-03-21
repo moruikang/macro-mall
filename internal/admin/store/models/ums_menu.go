@@ -3,7 +3,7 @@ package models
 type UmsMenu struct {
 	Model
 	// 父级ID
-	ParentID int64 `gorm:"column:parent_id;" json:"parentId"`
+	ParentId int64 `gorm:"column:parent_id;" json:"parentId"`
 	// 菜单名称
 	Title string `gorm:"column:title;not null" json:"title"`
 	// 菜单级数

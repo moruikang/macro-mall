@@ -33,17 +33,19 @@ type umsAdminService struct {
 	store store.Factory
 }
 
+var _ UmsAdminService = (*umsAdminService)(nil)
+
 func NewUmsAdminService(store store.Factory) UmsAdminService {
 	return &umsAdminService{
 		store: store,
 	}
 }
 
-func (svc umsAdminService) GetByUsername(g *gin.Context, username string) (*models.UmsAdmin, error) {
+func (svc *umsAdminService) GetByUsername(g *gin.Context, username string) (*models.UmsAdmin, error) {
 	return svc.store.UmsAdmins().GetByUserName(g, username)
 }
 
-func (svc umsAdminService) GetAdminInfo(g *gin.Context, username string) (map[string]interface{}, error) {
+func (svc *umsAdminService) GetAdminInfo(g *gin.Context, username string) (map[string]interface{}, error) {
 	admin, err := svc.store.UmsAdmins().GetByUserName(g, username)
 	if err != nil {
 		return nil, err
@@ -70,7 +72,7 @@ func (svc umsAdminService) GetAdminInfo(g *gin.Context, username string) (map[st
 
 }
 
-func (svc umsAdminService) Register(g *gin.Context, dto *dto.AdminRegisterDTO) error {
+func (svc *umsAdminService) Register(g *gin.Context, dto *dto.AdminRegisterDTO) error {
 
 	u, err := svc.store.UmsAdmins().GetByUserName(g, dto.Username)
 	if err != nil {
@@ -97,11 +99,11 @@ func (svc umsAdminService) Register(g *gin.Context, dto *dto.AdminRegisterDTO) e
 	return svc.store.UmsAdmins().Create(g, admin)
 }
 
-func (svc umsAdminService) Get(g *gin.Context, id int64) (*models.UmsAdmin, error) {
+func (svc *umsAdminService) Get(g *gin.Context, id int64) (*models.UmsAdmin, error) {
 	return svc.store.UmsAdmins().GetById(g, id)
 }
 
-func (svc umsAdminService) Update(g *gin.Context, dto *dto.AdminUpdateDTO) error {
+func (svc *umsAdminService) Update(g *gin.Context, dto *dto.AdminUpdateDTO) error {
 	admin, err := svc.store.UmsAdmins().GetById(g.Request.Context(), dto.Id)
 	if err != nil {
 		return err
@@ -114,11 +116,11 @@ func (svc umsAdminService) Update(g *gin.Context, dto *dto.AdminUpdateDTO) error
 	return svc.store.UmsAdmins().Update(g, admin)
 }
 
-func (svc umsAdminService) Delete(g *gin.Context, ids []int64) error {
+func (svc *umsAdminService) Delete(g *gin.Context, ids []int64) error {
 	return svc.store.UmsAdmins().DeleteCollection(g, ids)
 }
 
-func (svc umsAdminService) List(g *gin.Context, query *dto.PublicPageQuery) (*dto.PageResult, error) {
+func (svc *umsAdminService) List(g *gin.Context, query *dto.PublicPageQuery) (*dto.PageResult, error) {
 	totalCount, admins, err := svc.store.UmsAdmins().List(g, query.Keyword, query.PageSize, query.PageNum)
 	if err != nil {
 		return nil, err
@@ -135,11 +137,11 @@ func (svc umsAdminService) List(g *gin.Context, query *dto.PublicPageQuery) (*dt
 	}, nil
 }
 
-func (svc umsAdminService) UpdateStatus(g *gin.Context, userId int64, dto *dto.AdminUpdateStatusDTO) error {
+func (svc *umsAdminService) UpdateStatus(g *gin.Context, userId int64, dto *dto.AdminUpdateStatusDTO) error {
 	return svc.store.UmsAdmins().UpdateStatus(g, userId, dto.Status)
 }
 
-func (svc umsAdminService) UpdatePassword(g *gin.Context, dto *dto.AdminUpdatePasswordDTO) error {
+func (svc *umsAdminService) UpdatePassword(g *gin.Context, dto *dto.AdminUpdatePasswordDTO) error {
 	admin, err := svc.store.UmsAdmins().GetByUserName(g, dto.Username)
 	if err != nil {
 		return err
@@ -160,7 +162,7 @@ func (svc umsAdminService) UpdatePassword(g *gin.Context, dto *dto.AdminUpdatePa
 	return svc.store.UmsAdmins().Update(g, admin)
 }
 
-func (svc umsAdminService) UpdateRoles(g *gin.Context, dto *dto.AdminRoleRelationDTO) error {
+func (svc *umsAdminService) UpdateRoles(g *gin.Context, dto *dto.AdminRoleRelationDTO) error {
 
 	roleRelations := make([]*models.UmsAdminRoleRelation, 0)
 	for _, roleId := range dto.RoleIds {
@@ -174,6 +176,6 @@ func (svc umsAdminService) UpdateRoles(g *gin.Context, dto *dto.AdminRoleRelatio
 	return svc.store.UmsAdmins().UpdateRoles(g, dto.AdminId, roleRelations)
 }
 
-func (svc umsAdminService) GetUserRoleList(g *gin.Context, id int64) ([]*models.UmsRole, error) {
+func (svc *umsAdminService) GetUserRoleList(g *gin.Context, id int64) ([]*models.UmsRole, error) {
 	return svc.store.UmsAdmins().GetUserRoles(g, id)
 }
