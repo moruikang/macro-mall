@@ -12,6 +12,7 @@ type Factory interface {
 	UmsRoles() UmsRoleStore
 	UmsMenus() UmsMenuStore
 	UmsResources() UmsResourceStore
+	UmsResourceCategorys() UmsResourceCategoryStore
 }
 
 func GetClient() Factory {

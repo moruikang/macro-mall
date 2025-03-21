@@ -19,7 +19,9 @@ type UmsRoleStore interface {
 	ListAll(ctx context.Context) ([]*models.UmsRole, error)
 	UpdateStatus(ctx context.Context, id int64, status int) error
 	// 根据管理员ID获取用户菜单列表
-	ListMenus(ctx context.Context, adminId int64) ([]*models.UmsMenu, error)
+	GetMenuList(ctx context.Context, adminId int64) ([]*models.UmsMenu, error)
+	// 根据云角色ID获取菜单列表
+	ListMenus(ctx context.Context, roleId int64) ([]*models.UmsMenu, error)
 	// 根据角色Id获取角色资源列表
 	ListResources(ctx context.Context, roleId int64) ([]*models.UmsResource, error)
 	// 根据角色Id获取角色和资源关联关系

@@ -36,6 +36,10 @@ func (ds *datastore) UmsResources() store.UmsResourceStore {
 	return newUmsResource(ds)
 }
 
+func (ds *datastore) UmsResourceCategorys() store.UmsResourceCategoryStore {
+	return newUmsResourceCategory(ds)
+}
+
 // 确保实现了Factory工厂接口
 var _ store.Factory = (*datastore)(nil)
 

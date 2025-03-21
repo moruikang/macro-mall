@@ -33,22 +33,22 @@ func NewUmsResourceService(store store.Factory) UmsResourceService {
 	}
 }
 
-func (u umsResourceService) Create(g *gin.Context, dto *dto.ResourceCreateDTO) error {
+func (svc umsResourceService) Create(g *gin.Context, dto *dto.ResourceCreateDTO) error {
 	resource := &models.UmsResource{
 		CategoryId:  dto.CategoryId,
 		Name:        dto.Name,
 		Url:         dto.Url,
 		Description: dto.Description,
 	}
-	return u.store.UmsResources().Create(g, resource)
+	return svc.store.UmsResources().Create(g, resource)
 }
 
-func (u umsResourceService) Get(g *gin.Context, id int64) (*models.UmsResource, error) {
-	return u.store.UmsResources().GetById(g, id)
+func (svc umsResourceService) Get(g *gin.Context, id int64) (*models.UmsResource, error) {
+	return svc.store.UmsResources().GetById(g, id)
 }
 
-func (u umsResourceService) Update(g *gin.Context, id int64, dto *dto.ResourceCreateDTO) error {
-	resource, err := u.store.UmsResources().GetById(g, id)
+func (svc umsResourceService) Update(g *gin.Context, id int64, dto *dto.ResourceCreateDTO) error {
+	resource, err := svc.store.UmsResources().GetById(g, id)
 	if err != nil {
 		return err
 	}
@@ -56,15 +56,15 @@ func (u umsResourceService) Update(g *gin.Context, id int64, dto *dto.ResourceCr
 	resource.Name = dto.Name
 	resource.Url = dto.Url
 	resource.Description = dto.Description
-	return u.store.UmsResources().Update(g, resource)
+	return svc.store.UmsResources().Update(g, resource)
 }
 
-func (u umsResourceService) Delete(g *gin.Context, ids []int64) error {
-	return u.store.UmsResources().DeleteCollection(g, ids)
+func (svc umsResourceService) Delete(g *gin.Context, ids []int64) error {
+	return svc.store.UmsResources().DeleteCollection(g, ids)
 }
 
-func (u umsResourceService) List(g *gin.Context, parentId int64, queryDTO *dto.ResourcePageQueryDTO) (*dto.PageResult, error) {
-	total, resources, err := u.store.UmsResources().List(g,
+func (svc umsResourceService) List(g *gin.Context, parentId int64, queryDTO *dto.ResourcePageQueryDTO) (*dto.PageResult, error) {
+	total, resources, err := svc.store.UmsResources().List(g,
 		parentId,
 		queryDTO.NameKeyword,
 		queryDTO.UrlKeyword,
@@ -86,6 +86,6 @@ func (u umsResourceService) List(g *gin.Context, parentId int64, queryDTO *dto.R
 	}, nil
 }
 
-func (u umsResourceService) ListAll(g *gin.Context) ([]*models.UmsResource, error) {
-	return u.store.UmsResources().ListAll(g)
+func (svc umsResourceService) ListAll(g *gin.Context) ([]*models.UmsResource, error) {
+	return svc.store.UmsResources().ListAll(g)
 }
