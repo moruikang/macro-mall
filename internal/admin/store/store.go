@@ -15,7 +15,7 @@ type Factory interface {
 	UmsResourceCategorys() UmsResourceCategoryStore
 }
 
-func GetClient() Factory {
+func Client() Factory {
 	return client
 }
 

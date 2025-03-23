@@ -119,7 +119,7 @@ func (u umsRole) AllocMenus(ctx context.Context, roleId int64, menuIds []int64) 
 		var relations []*models.UmsRoleMenuRelation
 		for _, menuId := range menuIds {
 			relations = append(relations, &models.UmsRoleMenuRelation{
-				RoleID: roleId,
+				RoleId: roleId,
 				MenuID: menuId,
 			})
 		}
@@ -158,8 +158,8 @@ func (u umsRole) AllocResources(ctx context.Context, roleId int64, resourceIds [
 		roleMenuRelations := make([]*models.UmsRoleResourceRelation, 0)
 		for _, resourceId := range resourceIds {
 			roleMenuRelations = append(roleMenuRelations, &models.UmsRoleResourceRelation{
-				RoleID:     roleId,
-				ResourceID: resourceId,
+				RoleId:     roleId,
+				ResourceId: resourceId,
 			})
 		}
 

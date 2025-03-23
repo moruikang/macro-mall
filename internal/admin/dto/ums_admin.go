@@ -4,6 +4,13 @@
 
 package dto
 
+type AdminBaseDTO struct {
+	// 账号
+	Username string `json:"username"`
+	// 密码
+	Password string `json:"password"`
+}
+
 type AdminCreateDTO struct {
 	// 用户名
 	Username string `json:"username" form:"username" binding:"required"`
@@ -20,7 +27,7 @@ type AdminCreateDTO struct {
 }
 
 type AdminLoginDTO struct {
-	AdminCreateDTO
+	AdminBaseDTO
 }
 
 type AdminRegisterDTO struct {

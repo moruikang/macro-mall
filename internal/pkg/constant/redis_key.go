@@ -5,12 +5,15 @@
 package constant
 
 const (
-	MallPrefix               = "mall"
-	MallPolicyPrefix         = "mall_policy_"
-	MallPolicyResourcePrefix = "mall_resource_"
+	MallPrefix         = "mall"
+	MallPolicyPrefix   = "mall_policy_"
+	MallResourcePrefix = "mall_resource_"
 
 	// ladon
 	LadonPolicyPrefix   = "policy"
 	LadonResourcePrefix = "resource"
 	LadonSubjectPrefix  = "subject"
+
+	// Redis 里资源分隔符
+	Delimiter = ":"
 )

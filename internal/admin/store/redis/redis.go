@@ -31,6 +31,8 @@ type RedisFactory interface {
 	// 设置指定键的值
 	SetKey(key string, value interface{}) error
 
+	HGetAllKey(key string) (map[string]string, error)
+
 	// 以下是Redis 原生用法
 
 	Get(ctx context.Context, key string) *redis.StringCmd
@@ -146,6 +148,10 @@ func (r Redis) GetKey(key string) (string, error) {
 		return "", err
 	}
 	return val, nil
+}
+
+func (r Redis) HGetAllKey(key string) (map[string]string, error) {
+	return r.Client.HGetAll(r.Ctx, key).Result()
 }
 
 func (r Redis) SetKey(key string, value interface{}) error {

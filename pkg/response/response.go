@@ -52,7 +52,8 @@ func InternalServerError(g *gin.Context, message string) {
 	if message != "" {
 		response.Message = fmt.Sprintf("%s %s", InternalErrorCode.GetMessage(), message)
 	}
-	g.JSONP(http.StatusInternalServerError, response)
+	//g.JSONP(http.StatusInternalServerError, response)
+	g.JSONP(http.StatusOK, response)
 	return
 }
 
