@@ -23,5 +23,5 @@ type MenuCreateDTO struct {
 
 type MenuUpdateHiddenDTO struct {
 	// 前段隐藏菜单
-	Hidden int `json:"hidden" query:"hidden" form:"hidden"`
+	Hidden int64 `json:"hidden" query:"hidden" form:"hidden"`
 }
