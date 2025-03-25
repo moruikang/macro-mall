@@ -53,5 +53,59 @@ func Router() *gin.Engine {
 		}
 	}
 
+	// 后台角色接口
+	roleGroup := adminGroup.Group("/role")
+	roleGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
+	{
+		roleController := controller.NewUmsRoleController(storeIns)
+		roleGroup.POST("/create", roleController.Create)
+		roleGroup.GET("/list", roleController.ListRole)
+		roleGroup.GET("/listAll", roleController.ListAllRole)
+		roleGroup.POST("/update/:id", roleController.UpdateRole)
+		roleGroup.POST("/delete", roleController.DeleteRole)
+		roleGroup.POST("/updateStatus/:id", roleController.UpdateRoleStatus)
+		roleGroup.GET("/listMenu/:roleId", roleController.ListRoleMenu)
+		roleGroup.GET("/listResource/:roleId", roleController.ListRoleResource)
+		roleGroup.POST("/allocMenu", roleController.AllocRoleMenu)
+		roleGroup.POST("/allocResource", roleController.AllocRoleResource)
+
+	}
+	// 后台菜单接口
+	menuGroup := adminGroup.Group("/menu")
+	menuGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
+	{
+		menuController := controller.NewUmsMenuController(storeIns)
+		menuGroup.POST("/create", menuController.Create)
+		menuGroup.GET("/list/:parentId", menuController.ListMenu)
+		menuGroup.POST("/update/:id", menuController.UpdateMenu)
+		menuGroup.POST("/delete/:id", menuController.DeleteMenu)
+		menuGroup.POST("/updateHidden/:id", menuController.UpdateMenuHidden)
+		menuGroup.GET("/treeList", menuController.MenuTreeList)
+		menuGroup.GET("/:id", menuController.GetMenu)
+	}
+	// 后台资源接口
+	resourceGroup := adminGroup.Group("/resource")
+	resourceGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
+	{
+		resourceController := controller.NewUmsResourceController(storeIns)
+		resourceGroup.POST("/create", resourceController.Create)
+		resourceGroup.GET("/list", resourceController.ListResource)
+		resourceGroup.GET("/:id", resourceController.GetResource)
+		resourceGroup.POST("/update/:id", resourceController.UpdateResource)
+		resourceGroup.POST("/delete/:id", resourceController.DeleteResource)
+		resourceGroup.GET("/listAll", resourceController.ListAllResource)
+	}
+	// 后台资源分类接口
+	resourceCategoryGroup := adminGroup.Group("/resourceCategory")
+	resourceCategoryGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
+	{
+		resourceCategoryController := controller.NewUmsResourceCategoryController(storeIns)
+		resourceCategoryGroup.POST("/create", resourceCategoryController.Create)
+		resourceCategoryGroup.GET("/listAll", resourceCategoryController.ListAllResourceCategory)
+		resourceCategoryGroup.GET("/:id", resourceCategoryController.GetResourceCategory)
+		resourceCategoryGroup.POST("/update/:id", resourceCategoryController.UpdateResourceCategory)
+		resourceCategoryGroup.POST("/delete/:id", resourceCategoryController.DeleteResourceCategory)
+	}
+
 	return engine
 }

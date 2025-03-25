@@ -7,3 +7,7 @@ package dto
 type Base struct {
 	Id int64 `json:"id"`
 }
+
+type DeleteDTO struct {
+	Ids []int64 `json:"ids"`
+}

@@ -23,12 +23,12 @@ func NewUmsMenuController(store store.Factory) *UmsMenuController {
 	}
 }
 
-// @Summary 菜单注册
-// @Description 菜单注册
+// @Summary 菜单创建
+// @Description 菜单创建
 // @Tags 菜单
 // @Accept json
 // @Produce json
-// @Param data body dto.MenuCreateDTO true "菜单注册"
+// @Param data body dto.MenuCreateDTO true "菜单创建"
 // @Success 200 {object} response.Response{} "成功"
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /menu/create [post]
@@ -189,5 +189,24 @@ func (c *UmsMenuController) UpdateMenuHidden(g *gin.Context) {
 		return
 	}
 	response.Success(g, nil)
+	return
+}
+
+// @Summary 获取菜单树
+// @Description 获取菜单树
+// @Tags 菜单
+// @Accept json
+// @Produce json
+// @Success 200 {object} response.Response{data=models.UmsMenuNode} "成功"
+// @Failure 400 {object} response.Response{} "失败"
+// @Router /menu/treeList [get]
+func (c *UmsMenuController) MenuTreeList(g *gin.Context) {
+
+	menuTree, err := c.svc.UmsMenus().Tree(g)
+	if err != nil {
+		response.Fail(g, err.Error())
+		return
+	}
+	response.Success(g, menuTree)
 	return
 }

@@ -17,7 +17,7 @@ type UmsResourceService interface {
 	Get(g *gin.Context, id int64) (*models.UmsResource, error)
 	Update(g *gin.Context, id int64, dto *dto.ResourceCreateDTO) error
 	Delete(g *gin.Context, ids []int64) error
-	List(g *gin.Context, parentId int64, dto *dto.ResourcePageQueryDTO) (*dto.PageResult, error)
+	List(g *gin.Context, dto *dto.ResourcePageQueryDTO) (*dto.PageResult, error)
 	ListAll(g *gin.Context) ([]*models.UmsResource, error)
 }
 
@@ -63,9 +63,9 @@ func (svc umsResourceService) Delete(g *gin.Context, ids []int64) error {
 	return svc.store.UmsResources().DeleteCollection(g, ids)
 }
 
-func (svc umsResourceService) List(g *gin.Context, parentId int64, queryDTO *dto.ResourcePageQueryDTO) (*dto.PageResult, error) {
+func (svc umsResourceService) List(g *gin.Context, queryDTO *dto.ResourcePageQueryDTO) (*dto.PageResult, error) {
 	total, resources, err := svc.store.UmsResources().List(g,
-		parentId,
+		queryDTO.CategoryId,
 		queryDTO.NameKeyword,
 		queryDTO.UrlKeyword,
 		queryDTO.PageSize,
