@@ -77,7 +77,7 @@ func (c *UmsResourceController) GetResource(g *gin.Context) {
 // @Tags 资源
 // @Accept json
 // @Produce json
-// @Param data param dto.ResourcePageQueryDTO true "分页查询参数"
+// @Param data query dto.ResourcePageQueryDTO true "分页查询参数"
 // @Success 200 {object} response.Response{data=dto.PageResult} "成功"
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /resource/list [get]

@@ -83,8 +83,8 @@ func authenticator() func(c *gin.Context) (interface{}, error) {
 
 	return func(c *gin.Context) (interface{}, error) {
 
-		var loginDTO *dto.AdminLoginDTO
-		if err := c.ShouldBindJSON(loginDTO); err != nil {
+		var loginDTO dto.AdminLoginDTO
+		if err := c.ShouldBindJSON(&loginDTO); err != nil {
 			return nil, jwt.ErrMissingLoginValues
 		}
 		// 校验用户信息

@@ -1,0 +1,1251 @@
+swagger: "2.0"
+definitions:
+  dto.AdminRegisterDTO:
+    properties:
+      email:
+        description: 邮箱
+        type: string
+      icon:
+        description: 图标
+        type: string
+      nickname:
+        description: 昵称
+        type: string
+      note:
+        description: 备注
+        type: string
+      password:
+        description: 密码
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  dto.AdminRoleRelationDTO:
+    properties:
+      adminId:
+        type: integer
+      roleIds:
+        items:
+          type: integer
+        type: array
+    type: object
+  dto.AdminRoleStatusDTO:
+    properties:
+      status:
+        description: 角色启用状态 0->禁用，1->启用
+        type: integer
+    type: object
+  dto.AdminUpdateDTO:
+    properties:
+      email:
+        description: 邮箱
+        type: string
+      icon:
+        description: 图标
+        type: string
+      id:
+        type: integer
+      nickname:
+        description: 昵称
+        type: string
+      note:
+        description: 备注
+        type: string
+      password:
+        description: 密码
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  dto.AdminUpdatePasswordDTO:
+    properties:
+      newPassword:
+        description: 新密码
+        type: string
+      oldPassword:
+        description: 旧密码
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - newPassword
+    - oldPassword
+    - username
+    type: object
+  dto.AdminUpdateStatusDTO:
+    properties:
+      status:
+        description: 账号启用状态 0->禁用，1->启用
+        type: integer
+    type: object
+  dto.DeleteDTO:
+    properties:
+      ids:
+        items:
+          type: integer
+        type: array
+    type: object
+  dto.MenuCreateDTO:
+    properties:
+      hidden:
+        description: 前端隐藏
+        type: integer
+      icon:
+        description: 前端图标
+        type: string
+      level:
+        description: 菜单级数
+        type: integer
+      name:
+        description: 前端名称
+        type: string
+      parentId:
+        description: 父级ID
+        type: integer
+      sort:
+        description: 菜单排序
+        type: integer
+      title:
+        description: 菜单名称
+        type: string
+    type: object
+  dto.MenuUpdateHiddenDTO:
+    properties:
+      hidden:
+        description: 前段隐藏菜单
+        type: integer
+    type: object
+  dto.ResourceCategoryCreateDTO:
+    properties:
+      name:
+        description: 资源分类名称
+        type: string
+      sort:
+        description: 排序
+        type: integer
+    type: object
+  dto.ResourceCreateDTO:
+    properties:
+      categoryId:
+        description: 资源分类ID
+        type: integer
+      description:
+        description: 描述
+        type: string
+      name:
+        description: 资源名称
+        type: string
+      url:
+        description: 资源URL
+        type: string
+    type: object
+  dto.RoleAllocMenuDTO:
+    properties:
+      menuIds:
+        description: 菜单id列表
+        items:
+          type: integer
+        type: array
+      roleId:
+        description: 角色id
+        type: integer
+    type: object
+  dto.RoleCreateDTO:
+    properties:
+      adminCount:
+        description: 后台用户数量
+        type: integer
+      description:
+        description: 角色描述
+        type: string
+      name:
+        description: 角色名称
+        type: string
+      sort:
+        description: 排序
+        type: integer
+      status:
+        description: 启用状态：0->禁用；1->启用
+        type: integer
+    required:
+    - name
+    type: object
+  response.Response:
+    properties:
+      code:
+        type: integer
+      data:
+        type: object
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /admin/:
+    get:
+      consumes:
+      - application/json
+      description: 获取管理员信息
+      parameters:
+      - description: 管理员ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 获取管理员信息
+      tags:
+      - 管理员
+  /admin/delete/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 删除管理员
+      parameters:
+      - description: 管理员ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 删除管理员
+      tags:
+      - 管理员
+  /admin/info:
+    get:
+      consumes:
+      - application/json
+      description: 获取管理员信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 获取管理员信息
+      tags:
+      - 管理员
+  /admin/list:
+    get:
+      consumes:
+      - application/json
+      description: 分页查询管理员列表
+      parameters:
+      - description: 分页查询参数
+        in: query
+        name: data
+        required: true
+        type: dto.PublicPageQuery
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 分页查询管理员列表
+      tags:
+      - 管理员
+  /admin/register:
+    post:
+      consumes:
+      - application/json
+      description: 管理员注册
+      parameters:
+      - description: 管理员注册
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AdminRegisterDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 管理员注册
+      tags:
+      - 管理员
+  /admin/role/:
+    get:
+      consumes:
+      - application/json
+      description: 获取管理员角色
+      parameters:
+      - description: 管理员ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 获取管理员角色
+      tags:
+      - 管理员
+  /admin/role/update:
+    post:
+      consumes:
+      - application/json
+      description: 更新管理员信息
+      parameters:
+      - description: 管理员ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 管理员信息更新
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AdminRoleRelationDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 更新管理员信息
+      tags:
+      - 管理员
+  /admin/update/:
+    post:
+      consumes:
+      - application/json
+      description: 更新管理员信息
+      parameters:
+      - description: 管理员ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 管理员信息更新
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AdminUpdateDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 更新管理员信息
+      tags:
+      - 管理员
+  /admin/updatePassword:
+    post:
+      consumes:
+      - application/json
+      description: 更新管理员密码
+      parameters:
+      - description: 管理员信息更新
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AdminUpdatePasswordDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 更新管理员密码
+      tags:
+      - 管理员
+  /admin/updateStatus/:
+    put:
+      consumes:
+      - application/json
+      description: 更新管理员状态
+      parameters:
+      - description: 管理员ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 管理员信息更新
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AdminUpdateStatusDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 更新管理员状态
+      tags:
+      - 管理员
+  /menu/:
+    get:
+      consumes:
+      - application/json
+      description: 获取菜单信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 获取菜单信息
+      tags:
+      - 菜单
+  /menu/create:
+    post:
+      consumes:
+      - application/json
+      description: 菜单创建
+      parameters:
+      - description: 菜单创建
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.MenuCreateDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 菜单创建
+      tags:
+      - 菜单
+  /menu/delete/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 删除菜单
+      parameters:
+      - description: 菜单ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 删除菜单
+      tags:
+      - 菜单
+  /menu/list/:
+    get:
+      consumes:
+      - application/json
+      description: 分页查询菜单列表
+      parameters:
+      - description: 分页查询参数
+        in: query
+        name: data
+        required: true
+        type: dto.PublicPageQuery
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 分页查询菜单列表
+      tags:
+      - 菜单
+  /menu/treeList:
+    get:
+      consumes:
+      - application/json
+      description: 获取菜单树
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 获取菜单树
+      tags:
+      - 菜单
+  /menu/update/:
+    post:
+      consumes:
+      - application/json
+      description: 更新菜单信息
+      parameters:
+      - description: 菜单ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 菜单信息更新
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.MenuCreateDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 更新菜单信息
+      tags:
+      - 菜单
+  /menu/updateHidden/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 更新菜单显示状态
+      parameters:
+      - description: 菜单ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 请求体
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.MenuUpdateHiddenDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 更新菜单显示状态
+      tags:
+      - 菜单
+  /resource/:
+    get:
+      consumes:
+      - application/json
+      description: 获取资源信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 获取资源信息
+      tags:
+      - 资源
+  /resource/create:
+    post:
+      consumes:
+      - application/json
+      description: 创建资源
+      parameters:
+      - description: 创建资源
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ResourceCreateDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 创建资源
+      tags:
+      - 资源
+  /resource/delete/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 删除资源
+      parameters:
+      - description: 资源ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 删除资源
+      tags:
+      - 资源
+  /resource/list:
+    get:
+      consumes:
+      - application/json
+      description: 分页查询资源列表
+      parameters:
+      - description: 分页查询参数
+        in: query
+        name: data
+        required: true
+        type: dto.ResourcePageQueryDTO
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 分页查询资源列表
+      tags:
+      - 资源
+  /resource/listAll:
+    get:
+      consumes:
+      - application/json
+      description: 查询所有资源列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 查询所有资源列表
+      tags:
+      - 资源
+  /resource/update/:
+    post:
+      consumes:
+      - application/json
+      description: 更新资源信息
+      parameters:
+      - description: 资源ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 资源信息更新
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ResourceCreateDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 更新资源信息
+      tags:
+      - 资源
+  /resourceCategory/:
+    get:
+      consumes:
+      - application/json
+      description: 获取资源分类信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 获取资源分类信息
+      tags:
+      - 资源分类
+  /resourceCategory/create:
+    post:
+      consumes:
+      - application/json
+      description: 创建资源分类
+      parameters:
+      - description: 创建资源分类
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ResourceCategoryCreateDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 创建资源分类
+      tags:
+      - 资源分类
+  /resourceCategory/delete/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 删除资源分类
+      parameters:
+      - description: 资源分类ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 删除资源分类
+      tags:
+      - 资源分类
+  /resourceCategory/listAll:
+    get:
+      consumes:
+      - application/json
+      description: 查询所有资源分类列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 查询所有资源分类列表
+      tags:
+      - 资源分类
+  /resourceCategory/update/:
+    post:
+      consumes:
+      - application/json
+      description: 更新资源分类信息
+      parameters:
+      - description: 资源分类ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 资源分类信息更新
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ResourceCategoryCreateDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 更新资源分类信息
+      tags:
+      - 资源分类
+  /role/allocMenu:
+    post:
+      consumes:
+      - application/json
+      description: 给角色分配菜单
+      parameters:
+      - description: 角色ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 给角色分配菜单
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RoleAllocMenuDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 给角色分配菜单
+      tags:
+      - 角色
+  /role/allocResource:
+    post:
+      consumes:
+      - application/json
+      description: 给角色分配资源
+      parameters:
+      - description: 角色ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 给角色分配资源
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RoleAllocMenuDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 给角色分配资源
+      tags:
+      - 角色
+  /role/create:
+    post:
+      consumes:
+      - application/json
+      description: 创建角色
+      parameters:
+      - description: 创建角色
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RoleCreateDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 创建角色
+      tags:
+      - 角色
+  /role/delete:
+    post:
+      consumes:
+      - application/json
+      description: 删除角色
+      parameters:
+      - description: 角色ID
+        in: body
+        name: ids
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DeleteDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 删除角色
+      tags:
+      - 角色
+  /role/list:
+    get:
+      consumes:
+      - application/json
+      description: 分页查询角色列表
+      parameters:
+      - description: 分页查询参数
+        in: query
+        name: data
+        required: true
+        type: dto.PublicPageQuery
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 分页查询角色列表
+      tags:
+      - 角色
+  /role/listAll:
+    get:
+      consumes:
+      - application/json
+      description: 查询所有角色列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 查询所有角色列表
+      tags:
+      - 角色
+  /role/listMenu/:
+    get:
+      consumes:
+      - application/json
+      description: 获取角色菜单
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 获取角色菜单
+      tags:
+      - 角色
+  /role/listResource/:
+    get:
+      consumes:
+      - application/json
+      description: 获取角色资源
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 获取角色资源
+      tags:
+      - 角色
+  /role/update/:
+    post:
+      consumes:
+      - application/json
+      description: 更新角色信息
+      parameters:
+      - description: 角色ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 角色信息更新
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RoleCreateDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 更新角色信息
+      tags:
+      - 角色
+  /role/updateStatus/:
+    post:
+      consumes:
+      - application/json
+      description: 更新角色状态
+      parameters:
+      - description: 角色ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 角色撞塌更新
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AdminRoleStatusDTO'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/response.Response'
+            type: object
+      summary: 更新角色状态
+      tags:
+      - 角色

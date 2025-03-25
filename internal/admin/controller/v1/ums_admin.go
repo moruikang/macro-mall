@@ -120,7 +120,7 @@ func (c *UmsAdminController) GetAdminRoles(g *gin.Context) {
 // @Tags 管理员
 // @Accept json
 // @Produce json
-// @Param data param dto.PublicPageQuery true "分页查询参数"
+// @Param data query dto.PublicPageQuery true "分页查询参数"
 // @Success 200 {object} response.Response{data=dto.PageResult} "成功"
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /admin/list [get]

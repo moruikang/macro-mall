@@ -1,0 +1,1840 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {},
+        "license": {}
+    },
+    "paths": {
+        "/admin/": {
+            "get": {
+                "description": "获取管理员信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理员"
+                ],
+                "summary": "获取管理员信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "管理员ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/delete/{id}": {
+            "post": {
+                "description": "删除管理员",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理员"
+                ],
+                "summary": "删除管理员",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "管理员ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/info": {
+            "get": {
+                "description": "获取管理员信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理员"
+                ],
+                "summary": "获取管理员信息",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/list": {
+            "get": {
+                "description": "分页查询管理员列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理员"
+                ],
+                "summary": "分页查询管理员列表",
+                "parameters": [
+                    {
+                        "type": "dto.PublicPageQuery",
+                        "description": "分页查询参数",
+                        "name": "data",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/register": {
+            "post": {
+                "description": "管理员注册",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理员"
+                ],
+                "summary": "管理员注册",
+                "parameters": [
+                    {
+                        "description": "管理员注册",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.AdminRegisterDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/role/": {
+            "get": {
+                "description": "获取管理员角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理员"
+                ],
+                "summary": "获取管理员角色",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "管理员ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/role/update": {
+            "post": {
+                "description": "更新管理员信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理员"
+                ],
+                "summary": "更新管理员信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "管理员ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "管理员信息更新",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.AdminRoleRelationDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/update/": {
+            "post": {
+                "description": "更新管理员信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理员"
+                ],
+                "summary": "更新管理员信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "管理员ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "管理员信息更新",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.AdminUpdateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/updatePassword": {
+            "post": {
+                "description": "更新管理员密码",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理员"
+                ],
+                "summary": "更新管理员密码",
+                "parameters": [
+                    {
+                        "description": "管理员信息更新",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.AdminUpdatePasswordDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/updateStatus/": {
+            "put": {
+                "description": "更新管理员状态",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理员"
+                ],
+                "summary": "更新管理员状态",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "管理员ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "管理员信息更新",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.AdminUpdateStatusDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/menu/": {
+            "get": {
+                "description": "获取菜单信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "菜单"
+                ],
+                "summary": "获取菜单信息",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/menu/create": {
+            "post": {
+                "description": "菜单创建",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "菜单"
+                ],
+                "summary": "菜单创建",
+                "parameters": [
+                    {
+                        "description": "菜单创建",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.MenuCreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/menu/delete/{id}": {
+            "post": {
+                "description": "删除菜单",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "菜单"
+                ],
+                "summary": "删除菜单",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "菜单ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/menu/list/": {
+            "get": {
+                "description": "分页查询菜单列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "菜单"
+                ],
+                "summary": "分页查询菜单列表",
+                "parameters": [
+                    {
+                        "type": "dto.PublicPageQuery",
+                        "description": "分页查询参数",
+                        "name": "data",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/menu/treeList": {
+            "get": {
+                "description": "获取菜单树",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "菜单"
+                ],
+                "summary": "获取菜单树",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/menu/update/": {
+            "post": {
+                "description": "更新菜单信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "菜单"
+                ],
+                "summary": "更新菜单信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "菜单ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "菜单信息更新",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.MenuCreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/menu/updateHidden/{id}": {
+            "post": {
+                "description": "更新菜单显示状态",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "菜单"
+                ],
+                "summary": "更新菜单显示状态",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "菜单ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "请求体",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.MenuUpdateHiddenDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/resource/": {
+            "get": {
+                "description": "获取资源信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资源"
+                ],
+                "summary": "获取资源信息",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/resource/create": {
+            "post": {
+                "description": "创建资源",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资源"
+                ],
+                "summary": "创建资源",
+                "parameters": [
+                    {
+                        "description": "创建资源",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.ResourceCreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/resource/delete/{id}": {
+            "post": {
+                "description": "删除资源",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资源"
+                ],
+                "summary": "删除资源",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "资源ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/resource/list": {
+            "get": {
+                "description": "分页查询资源列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资源"
+                ],
+                "summary": "分页查询资源列表",
+                "parameters": [
+                    {
+                        "type": "dto.ResourcePageQueryDTO",
+                        "description": "分页查询参数",
+                        "name": "data",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/resource/listAll": {
+            "get": {
+                "description": "查询所有资源列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资源"
+                ],
+                "summary": "查询所有资源列表",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/resource/update/": {
+            "post": {
+                "description": "更新资源信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资源"
+                ],
+                "summary": "更新资源信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "资源ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "资源信息更新",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.ResourceCreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/resourceCategory/": {
+            "get": {
+                "description": "获取资源分类信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资源分类"
+                ],
+                "summary": "获取资源分类信息",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/resourceCategory/create": {
+            "post": {
+                "description": "创建资源分类",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资源分类"
+                ],
+                "summary": "创建资源分类",
+                "parameters": [
+                    {
+                        "description": "创建资源分类",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.ResourceCategoryCreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/resourceCategory/delete/{id}": {
+            "post": {
+                "description": "删除资源分类",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资源分类"
+                ],
+                "summary": "删除资源分类",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "资源分类ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/resourceCategory/listAll": {
+            "get": {
+                "description": "查询所有资源分类列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资源分类"
+                ],
+                "summary": "查询所有资源分类列表",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/resourceCategory/update/": {
+            "post": {
+                "description": "更新资源分类信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资源分类"
+                ],
+                "summary": "更新资源分类信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "资源分类ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "资源分类信息更新",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.ResourceCategoryCreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/role/allocMenu": {
+            "post": {
+                "description": "给角色分配菜单",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色"
+                ],
+                "summary": "给角色分配菜单",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "给角色分配菜单",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.RoleAllocMenuDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/role/allocResource": {
+            "post": {
+                "description": "给角色分配资源",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色"
+                ],
+                "summary": "给角色分配资源",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "给角色分配资源",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.RoleAllocMenuDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/role/create": {
+            "post": {
+                "description": "创建角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色"
+                ],
+                "summary": "创建角色",
+                "parameters": [
+                    {
+                        "description": "创建角色",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.RoleCreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/role/delete": {
+            "post": {
+                "description": "删除角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色"
+                ],
+                "summary": "删除角色",
+                "parameters": [
+                    {
+                        "description": "角色ID",
+                        "name": "ids",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.DeleteDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/role/list": {
+            "get": {
+                "description": "分页查询角色列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色"
+                ],
+                "summary": "分页查询角色列表",
+                "parameters": [
+                    {
+                        "type": "dto.PublicPageQuery",
+                        "description": "分页查询参数",
+                        "name": "data",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/role/listAll": {
+            "get": {
+                "description": "查询所有角色列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色"
+                ],
+                "summary": "查询所有角色列表",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/role/listMenu/": {
+            "get": {
+                "description": "获取角色菜单",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色"
+                ],
+                "summary": "获取角色菜单",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/role/listResource/": {
+            "get": {
+                "description": "获取角色资源",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色"
+                ],
+                "summary": "获取角色资源",
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/role/update/": {
+            "post": {
+                "description": "更新角色信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色"
+                ],
+                "summary": "更新角色信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "角色信息更新",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.RoleCreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/role/updateStatus/": {
+            "post": {
+                "description": "更新角色状态",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色"
+                ],
+                "summary": "更新角色状态",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "角色撞塌更新",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/dto.AdminRoleStatusDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "失败",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dto.AdminRegisterDTO": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "email": {
+                    "description": "邮箱",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "图标",
+                    "type": "string"
+                },
+                "nickname": {
+                    "description": "昵称",
+                    "type": "string"
+                },
+                "note": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "密码",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.AdminRoleRelationDTO": {
+            "type": "object",
+            "properties": {
+                "adminId": {
+                    "type": "integer"
+                },
+                "roleIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "dto.AdminRoleStatusDTO": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "description": "角色启用状态 0-\u003e禁用，1-\u003e启用",
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.AdminUpdateDTO": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "email": {
+                    "description": "邮箱",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "图标",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "nickname": {
+                    "description": "昵称",
+                    "type": "string"
+                },
+                "note": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "密码",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.AdminUpdatePasswordDTO": {
+            "type": "object",
+            "required": [
+                "newPassword",
+                "oldPassword",
+                "username"
+            ],
+            "properties": {
+                "newPassword": {
+                    "description": "新密码",
+                    "type": "string"
+                },
+                "oldPassword": {
+                    "description": "旧密码",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.AdminUpdateStatusDTO": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "description": "账号启用状态 0-\u003e禁用，1-\u003e启用",
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.DeleteDTO": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "dto.MenuCreateDTO": {
+            "type": "object",
+            "properties": {
+                "hidden": {
+                    "description": "前端隐藏",
+                    "type": "integer"
+                },
+                "icon": {
+                    "description": "前端图标",
+                    "type": "string"
+                },
+                "level": {
+                    "description": "菜单级数",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "前端名称",
+                    "type": "string"
+                },
+                "parentId": {
+                    "description": "父级ID",
+                    "type": "integer"
+                },
+                "sort": {
+                    "description": "菜单排序",
+                    "type": "integer"
+                },
+                "title": {
+                    "description": "菜单名称",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.MenuUpdateHiddenDTO": {
+            "type": "object",
+            "properties": {
+                "hidden": {
+                    "description": "前段隐藏菜单",
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.ResourceCategoryCreateDTO": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "资源分类名称",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "排序",
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.ResourceCreateDTO": {
+            "type": "object",
+            "properties": {
+                "categoryId": {
+                    "description": "资源分类ID",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "描述",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "资源名称",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "资源URL",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.RoleAllocMenuDTO": {
+            "type": "object",
+            "properties": {
+                "menuIds": {
+                    "description": "菜单id列表",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "roleId": {
+                    "description": "角色id",
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.RoleCreateDTO": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "adminCount": {
+                    "description": "后台用户数量",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "角色描述",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "角色名称",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "排序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "启用状态：0-\u003e禁用；1-\u003e启用",
+                    "type": "integer"
+                }
+            }
+        },
+        "response.Response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "type": "object"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

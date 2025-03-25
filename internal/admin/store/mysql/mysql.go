@@ -56,7 +56,7 @@ func GetMySQLFactoryOr(opts *options.MySQLOptions) (store.Factory, error) {
 	var err error
 	var dbIns *gorm.DB
 	once.Do(func() {
-		dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 			opts.Username,
 			opts.Password,
 			opts.Host,
@@ -78,6 +78,7 @@ func GetMySQLFactoryOr(opts *options.MySQLOptions) (store.Factory, error) {
 		sqlDB.SetConnMaxIdleTime(opts.MaxConnectionLifeTime)
 
 		mysqlFactory = &datastore{dbIns}
+		store.SetClient(mysqlFactory)
 	})
 
 	if mysqlFactory == nil || err != nil {

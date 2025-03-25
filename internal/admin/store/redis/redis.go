@@ -34,7 +34,6 @@ type RedisFactory interface {
 	HGetAllKey(key string) (map[string]string, error)
 
 	// 以下是Redis 原生用法
-
 	Get(ctx context.Context, key string) *redis.StringCmd
 	Set(ctx context.Context, key string, value interface{}, expiration ...time.Duration) *redis.StatusCmd
 	Del(ctx context.Context, keys ...string) *redis.IntCmd
@@ -98,6 +97,7 @@ func GetRedisFactoryOr(opts *options.RedisOptions) (RedisFactory, error) {
 	if Factory == nil || err != nil {
 		log.Errorf("fali to get redis store factory %s", err.Error())
 	}
+	SetRedisFactory(Factory)
 	return Factory, nil
 }
 

@@ -7,6 +7,9 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	docs "macro-mall/doc/mall_admin"
 	controller "macro-mall/internal/admin/controller/v1"
 	"macro-mall/internal/admin/store/mysql"
 	"macro-mall/internal/pkg/middleware"
@@ -37,7 +40,8 @@ func Router() *gin.Engine {
 			noAuthGroup.POST("/register", adminController.Register)
 			noAuthGroup.POST("/login", authMiddleware.LoginHandler)
 		}
-		adminGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
+		//adminGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
+		adminGroup.Use(authMiddleware.MiddlewareFunc())
 		{
 			adminGroup.POST("/logout", authMiddleware.LogoutHandler)
 			adminGroup.POST("/refreshToken", authMiddleware.RefreshHandler)
@@ -106,6 +110,9 @@ func Router() *gin.Engine {
 		resourceCategoryGroup.POST("/update/:id", resourceCategoryController.UpdateResourceCategory)
 		resourceCategoryGroup.POST("/delete/:id", resourceCategoryController.DeleteResourceCategory)
 	}
+
+	docs.SwaggerInfo.Title = "mall_admin"
+	engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	return engine
 }
