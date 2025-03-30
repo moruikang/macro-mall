@@ -34,7 +34,7 @@ func NewUmsAdminController(store store.Factory) *UmsAdminController {
 // @Router /admin/register [post]
 func (c *UmsAdminController) Register(g *gin.Context) {
 
-	var umsAdmin *dto.AdminRegisterDTO
+	var umsAdmin = &dto.AdminRegisterDTO{}
 	if err := g.ShouldBindJSON(umsAdmin); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -126,7 +126,7 @@ func (c *UmsAdminController) GetAdminRoles(g *gin.Context) {
 // @Router /admin/list [get]
 func (c *UmsAdminController) ListAdmin(g *gin.Context) {
 
-	var query *dto.PublicPageQuery
+	var query = &dto.PublicPageQuery{}
 	if err := g.ShouldBindQuery(query); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -152,7 +152,7 @@ func (c *UmsAdminController) ListAdmin(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /admin/update/:id [post]
 func (c *UmsAdminController) UpdateAdmin(g *gin.Context) {
-	var umsAdmin *dto.AdminUpdateDTO
+	var umsAdmin = &dto.AdminUpdateDTO{}
 	if err := g.ShouldBindJSON(umsAdmin); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -184,7 +184,7 @@ func (c *UmsAdminController) UpdateAdmin(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /admin/role/update [post]
 func (c *UmsAdminController) UpdateAdminRole(g *gin.Context) {
-	var req *dto.AdminRoleRelationDTO
+	var req = &dto.AdminRoleRelationDTO{}
 	if err := g.ShouldBindJSON(req); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -233,7 +233,7 @@ func (c *UmsAdminController) DeleteAdmin(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /admin/updatePassword [post]
 func (c *UmsAdminController) UpdatePassword(g *gin.Context) {
-	var req *dto.AdminUpdatePasswordDTO
+	var req = &dto.AdminUpdatePasswordDTO{}
 	if err := g.ShouldBindJSON(req); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -259,7 +259,7 @@ func (c *UmsAdminController) UpdatePassword(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /admin/updateStatus/:id [put]
 func (c *UmsAdminController) UpdateStatus(g *gin.Context) {
-	var req *dto.AdminUpdateStatusDTO
+	var req = &dto.AdminUpdateStatusDTO{}
 	if err := g.ShouldBindJSON(req); err != nil {
 		response.ValidateError(g, err.Error())
 		return

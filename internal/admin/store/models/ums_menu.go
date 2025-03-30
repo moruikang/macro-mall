@@ -22,3 +22,7 @@ type UmsMenuNode struct {
 	UmsMenu
 	Children []*UmsMenuNode `json:"children"`
 }
+
+func (*UmsMenu) TableName() string {
+	return "ums_menu"
+}

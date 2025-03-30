@@ -59,7 +59,7 @@ func (svc *umsAdminService) GetAdminInfo(g *gin.Context, username string) (map[s
 	for _, role := range userRoleList {
 		roleNames = append(roleNames, role.Name)
 	}
-	menus, err := svc.store.UmsRoles().ListMenus(g, admin.Id)
+	menus, err := svc.store.UmsRoles().GetMenuList(g, admin.Id)
 	if err != nil {
 		return nil, err
 	}

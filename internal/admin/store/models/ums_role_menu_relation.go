@@ -7,3 +7,7 @@ type UmsRoleMenuRelation struct {
 	// 菜单ID
 	MenuID int64 `gorm:"column:menu_id;not null" json:"menuId"`
 }
+
+func (*UmsRoleMenuRelation) TableName() string {
+	return "ums_role_menu_relation"
+}

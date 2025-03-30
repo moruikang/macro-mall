@@ -7,6 +7,7 @@ package main
 import (
 	"fmt"
 	log "github.com/sirupsen/logrus"
+	"macro-mall/internal/admin/authorization"
 	"macro-mall/internal/admin/config"
 	"macro-mall/internal/admin/router"
 	"macro-mall/internal/admin/store/initialization"
@@ -17,8 +18,8 @@ import (
 func init() {
 
 	config.InitConfig()
-	initialization.Store()
-	initialization.Redis()
+	initialization.InitFactory()
+	authorization.InitialAuthorization()
 
 }
 
@@ -41,6 +42,8 @@ func main() {
 
 	log.Printf("[info] start http server listening %s", endPoint)
 
-	server.ListenAndServe()
+	if err := server.ListenAndServe(); err != nil {
+		log.Fatalf("start http server failed, err: %v", err)
+	}
 
 }

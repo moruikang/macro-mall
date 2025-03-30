@@ -69,16 +69,12 @@ func (u umsRole) UpdateStatus(ctx context.Context, id int64, status int) error {
 
 func (u umsRole) GetMenuList(ctx context.Context, adminId int64) ([]*models.UmsMenu, error) {
 	var menus []*models.UmsMenu
-	/*	err := u.db.Joins("LEFT JOIN ums_role_menu_relation ON ums_role_menu_relation.menu_id = ums_menu.id").
-		Joins("LEFT JOIN ums_admin_role_relation ON ums_admin_role_relation.role_id = ums_role_menu_relation.role_id").
-		Where("ums_admin_role_relation.admin_id = ?", adminId).
-		Find(&menus).Error*/
 	err := u.db.
-		Joins("LEFT JOIN ums_role r ON arr.role_id = r.id").
-		Joins("LEFT JOIN ums_role_menu_relation rmr ON r.id = rmr.role_id").
-		Joins("LEFT JOIN ums_menu m ON rmr.menu_id = m.id").
-		Where("arr.admin_id = ? AND m.id IS NOT NULL", adminId).
-		Group("m.id").
+		Joins("LEFT JOIN ums_role_menu_relation rmr ON ums_menu.id = rmr.menu_id").
+		Joins("LEFT JOIN ums_role r ON rmr.role_id = r.id").
+		Joins("LEFT JOIN ums_admin_role_relation arr ON r.id = arr.role_id").
+		Where("arr.admin_id = ? AND ums_menu.id IS NOT NULL", adminId).
+		Group("ums_menu.id").
 		Find(&menus).Error
 	return menus, err
 }

@@ -34,7 +34,7 @@ func NewUmsResourceController(store store.Factory) *UmsResourceController {
 // @Router /resource/create [post]
 func (c *UmsResourceController) Create(g *gin.Context) {
 
-	var umsResource *dto.ResourceCreateDTO
+	var umsResource = &dto.ResourceCreateDTO{}
 	if err := g.ShouldBindJSON(umsResource); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -83,7 +83,7 @@ func (c *UmsResourceController) GetResource(g *gin.Context) {
 // @Router /resource/list [get]
 func (c *UmsResourceController) ListResource(g *gin.Context) {
 
-	var query *dto.ResourcePageQueryDTO
+	var query = &dto.ResourcePageQueryDTO{}
 	if err := g.ShouldBindQuery(query); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -109,7 +109,7 @@ func (c *UmsResourceController) ListResource(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /resource/update/:id [post]
 func (c *UmsResourceController) UpdateResource(g *gin.Context) {
-	var umsResource *dto.ResourceCreateDTO
+	var umsResource = &dto.ResourceCreateDTO{}
 	if err := g.ShouldBindJSON(umsResource); err != nil {
 		response.ValidateError(g, err.Error())
 		return

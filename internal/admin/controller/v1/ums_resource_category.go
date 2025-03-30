@@ -83,7 +83,7 @@ func (c *UmsResourceCategoryController) GetResourceCategory(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /resourceCategory/update/:id [post]
 func (c *UmsResourceCategoryController) UpdateResourceCategory(g *gin.Context) {
-	var umsResourceCategory *dto.ResourceCategoryCreateDTO
+	var umsResourceCategory = &dto.ResourceCategoryCreateDTO{}
 	if err := g.ShouldBindJSON(umsResourceCategory); err != nil {
 		response.ValidateError(g, err.Error())
 		return

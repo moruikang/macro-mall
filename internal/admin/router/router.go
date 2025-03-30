@@ -40,7 +40,7 @@ func Router() *gin.Engine {
 			noAuthGroup.POST("/register", adminController.Register)
 			noAuthGroup.POST("/login", authMiddleware.LoginHandler)
 		}
-		//adminGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
+		adminGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
 		adminGroup.Use(authMiddleware.MiddlewareFunc())
 		{
 			adminGroup.POST("/logout", authMiddleware.LogoutHandler)
@@ -58,7 +58,7 @@ func Router() *gin.Engine {
 	}
 
 	// 后台角色接口
-	roleGroup := adminGroup.Group("/role")
+	roleGroup := engine.Group("/role")
 	roleGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
 	{
 		roleController := controller.NewUmsRoleController(storeIns)
@@ -75,7 +75,7 @@ func Router() *gin.Engine {
 
 	}
 	// 后台菜单接口
-	menuGroup := adminGroup.Group("/menu")
+	menuGroup := engine.Group("/menu")
 	menuGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
 	{
 		menuController := controller.NewUmsMenuController(storeIns)
@@ -88,7 +88,7 @@ func Router() *gin.Engine {
 		menuGroup.GET("/:id", menuController.GetMenu)
 	}
 	// 后台资源接口
-	resourceGroup := adminGroup.Group("/resource")
+	resourceGroup := engine.Group("/resource")
 	resourceGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
 	{
 		resourceController := controller.NewUmsResourceController(storeIns)
@@ -100,7 +100,7 @@ func Router() *gin.Engine {
 		resourceGroup.GET("/listAll", resourceController.ListAllResource)
 	}
 	// 后台资源分类接口
-	resourceCategoryGroup := adminGroup.Group("/resourceCategory")
+	resourceCategoryGroup := engine.Group("/resourceCategory")
 	resourceCategoryGroup.Use(authMiddleware.MiddlewareFunc(), middleware.SetJwtInfo())
 	{
 		resourceCategoryController := controller.NewUmsResourceCategoryController(storeIns)

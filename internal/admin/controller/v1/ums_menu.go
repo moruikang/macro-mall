@@ -34,7 +34,7 @@ func NewUmsMenuController(store store.Factory) *UmsMenuController {
 // @Router /menu/create [post]
 func (c *UmsMenuController) Create(g *gin.Context) {
 
-	var umsMenu *dto.MenuCreateDTO
+	var umsMenu = &dto.MenuCreateDTO{}
 	if err := g.ShouldBindJSON(umsMenu); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -83,7 +83,7 @@ func (c *UmsMenuController) GetMenu(g *gin.Context) {
 // @Router /menu/list/:parentId [get]
 func (c *UmsMenuController) ListMenu(g *gin.Context) {
 
-	var query *dto.PageQuery
+	var query = &dto.PageQuery{}
 	if err := g.ShouldBindQuery(query); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -115,7 +115,7 @@ func (c *UmsMenuController) ListMenu(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /menu/update/:id [post]
 func (c *UmsMenuController) UpdateMenu(g *gin.Context) {
-	var umsMenu *dto.MenuCreateDTO
+	var umsMenu = &dto.MenuCreateDTO{}
 	if err := g.ShouldBindJSON(umsMenu); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -172,7 +172,7 @@ func (c *UmsMenuController) DeleteMenu(g *gin.Context) {
 // @Router /menu/updateHidden/{id} [post]
 func (c *UmsMenuController) UpdateMenuHidden(g *gin.Context) {
 
-	var req *dto.MenuUpdateHiddenDTO
+	var req = &dto.MenuUpdateHiddenDTO{}
 	if err := g.ShouldBindJSON(req); err != nil {
 		response.ValidateError(g, err.Error())
 		return

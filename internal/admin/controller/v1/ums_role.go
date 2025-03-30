@@ -34,7 +34,7 @@ func NewUmsRoleController(store store.Factory) *UmsRoleController {
 // @Router /role/create [post]
 func (c *UmsRoleController) Create(g *gin.Context) {
 
-	var umsRole *dto.RoleCreateDTO
+	var umsRole = &dto.RoleCreateDTO{}
 	if err := g.ShouldBindJSON(umsRole); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -58,8 +58,8 @@ func (c *UmsRoleController) Create(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /role/list [get]
 func (c *UmsRoleController) ListRole(g *gin.Context) {
-
-	var query *dto.PublicPageQuery
+	// 初始化query变量
+	query := &dto.PublicPageQuery{}
 	if err := g.ShouldBindQuery(query); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -85,7 +85,7 @@ func (c *UmsRoleController) ListRole(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /role/update/:id [post]
 func (c *UmsRoleController) UpdateRole(g *gin.Context) {
-	var umsRole *dto.RoleCreateDTO
+	var umsRole = &dto.RoleCreateDTO{}
 	if err := g.ShouldBindJSON(umsRole); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -117,7 +117,7 @@ func (c *UmsRoleController) UpdateRole(g *gin.Context) {
 // @Router /role/delete [post]
 func (c *UmsRoleController) DeleteRole(g *gin.Context) {
 
-	var req *dto.RoleDeleteDTO
+	var req = &dto.RoleDeleteDTO{}
 	if err := g.ShouldBindJSON(req); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -161,7 +161,7 @@ func (c *UmsRoleController) ListAllRole(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /role/updateStatus/:id [post]
 func (c *UmsRoleController) UpdateRoleStatus(g *gin.Context) {
-	var req *dto.AdminRoleStatusDTO
+	var req = &dto.AdminRoleStatusDTO{}
 	if err := g.ShouldBindJSON(req); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -243,7 +243,7 @@ func (c *UmsRoleController) ListRoleResource(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /role/allocMenu [post]
 func (c *UmsRoleController) AllocRoleMenu(g *gin.Context) {
-	var req *dto.RoleAllocMenuDTO
+	var req = &dto.RoleAllocMenuDTO{}
 	if err := g.ShouldBindJSON(req); err != nil {
 		response.ValidateError(g, err.Error())
 		return
@@ -269,7 +269,7 @@ func (c *UmsRoleController) AllocRoleMenu(g *gin.Context) {
 // @Failure 400 {object} response.Response{} "失败"
 // @Router /role/allocResource [post]
 func (c *UmsRoleController) AllocRoleResource(g *gin.Context) {
-	var req *dto.RoleAllocResourceDTO
+	var req = &dto.RoleAllocResourceDTO{}
 	if err := g.ShouldBindJSON(req); err != nil {
 		response.ValidateError(g, err.Error())
 		return
