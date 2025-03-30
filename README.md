@@ -1,4 +1,4 @@
-# 一个用 Go 仿写 [macrozheng](https://github.com/macrozheng/mall) 的开源项目
+# 一个用 Go 仿写 [macrozheng mall](https://github.com/macrozheng/mall) 的开源项目
 
 # 1. 项目介绍
 
